@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xingyuan.springboot.entity.mapper.LocationAllEntityMapper">
+    <resultMap id="BaseResultMap" type="com.xingyuan.springboot.entity.po.LocationAllEntity">
+        <result column="locationId" jdbcType="INTEGER" property="locationid"/>
+        <result column="locationName" jdbcType="VARCHAR" property="locationname"/>
+        <result column="locationShortName" jdbcType="VARCHAR" property="locationshortname"/>
+        <result column="locationPath" jdbcType="VARCHAR" property="locationpath"/>
+        <result column="locationSpellName" jdbcType="VARCHAR" property="locationspellname"/>
+        <result column="locationbusinessTypeId" jdbcType="INTEGER" property="locationbusinesstypeid"/>
+        <result column="cId" jdbcType="INTEGER" property="cid"/>
+        <result column="cName" jdbcType="VARCHAR" property="cname"/>
+        <result column="cSpellName" jdbcType="VARCHAR" property="cspellname"/>
+        <result column="Pid" jdbcType="INTEGER" property="pid"/>
+        <result column="pName" jdbcType="VARCHAR" property="pname"/>
+        <result column="pspellName" jdbcType="VARCHAR" property="pspellname"/>
+        <result column="inImportant" jdbcType="INTEGER" property="inimportant"/>
+        <result column="LocationGroupId" jdbcType="INTEGER" property="locationgroupid"/>
+        <result column="LocationFullName" jdbcType="VARCHAR" property="locationfullname"/>
+        <result column="Level" jdbcType="INTEGER" property="level"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        locationId, locationName, locationShortName, locationPath, locationSpellName, locationbusinessTypeId,
+        cId, cName, cSpellName, Pid, pName, pspellName, inImportant, LocationGroupId, LocationFullName,
+        Level
+    </sql>
+    <select id="selectByExample" parameterType="com.xingyuan.springboot.entity.po.LocationAllEntityExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from LocationAll
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.xingyuan.springboot.entity.po.LocationAllEntityExample">
+        delete from LocationAll
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.xingyuan.springboot.entity.po.LocationAllEntity">
+        <selectKey keyProperty="locationid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into LocationAll (locationName, locationShortName,
+        locationPath, locationSpellName, locationbusinessTypeId,
+        cId, cName, cSpellName,
+        Pid, pName, pspellName,
+        inImportant, LocationGroupId, LocationFullName,
+        Level)
+        values (#{locationname,jdbcType=VARCHAR}, #{locationshortname,jdbcType=VARCHAR},
+        #{locationpath,jdbcType=VARCHAR}, #{locationspellname,jdbcType=VARCHAR},
+        #{locationbusinesstypeid,jdbcType=INTEGER},
+        #{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{cspellname,jdbcType=VARCHAR},
+        #{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR}, #{pspellname,jdbcType=VARCHAR},
+        #{inimportant,jdbcType=INTEGER}, #{locationgroupid,jdbcType=INTEGER}, #{locationfullname,jdbcType=VARCHAR},
+        #{level,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.xingyuan.springboot.entity.po.LocationAllEntity">
+        <selectKey keyProperty="locationid" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into LocationAll
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="locationname != null">
+                locationName,
+            </if>
+            <if test="locationshortname != null">
+                locationShortName,
+            </if>
+            <if test="locationpath != null">
+                locationPath,
+            </if>
+            <if test="locationspellname != null">
+                locationSpellName,
+            </if>
+            <if test="locationbusinesstypeid != null">
+                locationbusinessTypeId,
+            </if>
+            <if test="cid != null">
+                cId,
+            </if>
+            <if test="cname != null">
+                cName,
+            </if>
+            <if test="cspellname != null">
+                cSpellName,
+            </if>
+            <if test="pid != null">
+                Pid,
+            </if>
+            <if test="pname != null">
+                pName,
+            </if>
+            <if test="pspellname != null">
+                pspellName,
+            </if>
+            <if test="inimportant != null">
+                inImportant,
+            </if>
+            <if test="locationgroupid != null">
+                LocationGroupId,
+            </if>
+            <if test="locationfullname != null">
+                LocationFullName,
+            </if>
+            <if test="level != null">
+                Level,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="locationname != null">
+                #{locationname,jdbcType=VARCHAR},
+            </if>
+            <if test="locationshortname != null">
+                #{locationshortname,jdbcType=VARCHAR},
+            </if>
+            <if test="locationpath != null">
+                #{locationpath,jdbcType=VARCHAR},
+            </if>
+            <if test="locationspellname != null">
+                #{locationspellname,jdbcType=VARCHAR},
+            </if>
+            <if test="locationbusinesstypeid != null">
+                #{locationbusinesstypeid,jdbcType=INTEGER},
+            </if>
+            <if test="cid != null">
+                #{cid,jdbcType=INTEGER},
+            </if>
+            <if test="cname != null">
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="cspellname != null">
+                #{cspellname,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="pname != null">
+                #{pname,jdbcType=VARCHAR},
+            </if>
+            <if test="pspellname != null">
+                #{pspellname,jdbcType=VARCHAR},
+            </if>
+            <if test="inimportant != null">
+                #{inimportant,jdbcType=INTEGER},
+            </if>
+            <if test="locationgroupid != null">
+                #{locationgroupid,jdbcType=INTEGER},
+            </if>
+            <if test="locationfullname != null">
+                #{locationfullname,jdbcType=VARCHAR},
+            </if>
+            <if test="level != null">
+                #{level,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.xingyuan.springboot.entity.po.LocationAllEntityExample"
+            resultType="java.lang.Long">
+        select count(*) from LocationAll
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update LocationAll
+        <set>
+            <if test="record.locationid != null">
+                locationId = #{record.locationid,jdbcType=INTEGER},
+            </if>
+            <if test="record.locationname != null">
+                locationName = #{record.locationname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.locationshortname != null">
+                locationShortName = #{record.locationshortname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.locationpath != null">
+                locationPath = #{record.locationpath,jdbcType=VARCHAR},
+            </if>
+            <if test="record.locationspellname != null">
+                locationSpellName = #{record.locationspellname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.locationbusinesstypeid != null">
+                locationbusinessTypeId = #{record.locationbusinesstypeid,jdbcType=INTEGER},
+            </if>
+            <if test="record.cid != null">
+                cId = #{record.cid,jdbcType=INTEGER},
+            </if>
+            <if test="record.cname != null">
+                cName = #{record.cname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.cspellname != null">
+                cSpellName = #{record.cspellname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pid != null">
+                Pid = #{record.pid,jdbcType=INTEGER},
+            </if>
+            <if test="record.pname != null">
+                pName = #{record.pname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pspellname != null">
+                pspellName = #{record.pspellname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.inimportant != null">
+                inImportant = #{record.inimportant,jdbcType=INTEGER},
+            </if>
+            <if test="record.locationgroupid != null">
+                LocationGroupId = #{record.locationgroupid,jdbcType=INTEGER},
+            </if>
+            <if test="record.locationfullname != null">
+                LocationFullName = #{record.locationfullname,jdbcType=VARCHAR},
+            </if>
+            <if test="record.level != null">
+                Level = #{record.level,jdbcType=INTEGER},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update LocationAll
+        set locationId = #{record.locationid,jdbcType=INTEGER},
+        locationName = #{record.locationname,jdbcType=VARCHAR},
+        locationShortName = #{record.locationshortname,jdbcType=VARCHAR},
+        locationPath = #{record.locationpath,jdbcType=VARCHAR},
+        locationSpellName = #{record.locationspellname,jdbcType=VARCHAR},
+        locationbusinessTypeId = #{record.locationbusinesstypeid,jdbcType=INTEGER},
+        cId = #{record.cid,jdbcType=INTEGER},
+        cName = #{record.cname,jdbcType=VARCHAR},
+        cSpellName = #{record.cspellname,jdbcType=VARCHAR},
+        Pid = #{record.pid,jdbcType=INTEGER},
+        pName = #{record.pname,jdbcType=VARCHAR},
+        pspellName = #{record.pspellname,jdbcType=VARCHAR},
+        inImportant = #{record.inimportant,jdbcType=INTEGER},
+        LocationGroupId = #{record.locationgroupid,jdbcType=INTEGER},
+        LocationFullName = #{record.locationfullname,jdbcType=VARCHAR},
+        Level = #{record.level,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+</mapper>
