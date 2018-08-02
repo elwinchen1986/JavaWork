@@ -1,6 +1,7 @@
 package collections;
 
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ListTest {
 
@@ -43,6 +44,14 @@ public class ListTest {
         vtor.forEach(s -> {
             System.out.println(s);
         });
+
+
+        // CopyOnWriteArrayList
+
+        CopyOnWriteArrayList copyOnWriteArrayList = new CopyOnWriteArrayList();
+
+        copyOnWriteArrayList.add("12312");
+        copyOnWriteArrayList.get(1);
 
     }
 
