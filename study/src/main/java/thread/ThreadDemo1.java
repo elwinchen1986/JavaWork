@@ -1,4 +1,4 @@
-package threadtest;
+package thread;
 
 public class ThreadDemo1 {
 

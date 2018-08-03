@@ -1,6 +1,4 @@
-package threadtest.threadpool;
-
-import org.jetbrains.annotations.NotNull;
+package thread.threadpool;
 
 import java.util.concurrent.*;
 
@@ -16,18 +14,18 @@ public class ThreadPoolTest {
 
     public static void main(String[] args) {
 
-//        // 无限制，最大int.max个线程池
-//        ExecutorService executorService = Executors.newCachedThreadPool();
-//        executor(executorService);
-//
-//        // 固定个数
-//        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
-//        executor(fixedThreadPool);
-//
-//
-//        // 单个线程
-//        ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-//        executor(singleThreadExecutor);
+        // 无限制，最大int.max个线程池
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        executor(executorService);
+
+        // 固定个数
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(5);
+        executor(fixedThreadPool);
+
+
+        // 单个线程
+        ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+        executor(singleThreadExecutor);
 
         ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(5);
         submit(scheduledThreadPool);

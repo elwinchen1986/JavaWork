@@ -29,9 +29,21 @@ public class NIOTest {
 
             FileChannel channel = fileInputStream.getChannel();
 
+
             ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
 
+            String d="123456";
+
+            byteBuffer.remaining();
+
+            byteBuffer.rewind();
+
+            byteBuffer.get();
+
+            byteBuffer.flip();
+
             int read = channel.read(byteBuffer);
+
 
 
         } catch (FileNotFoundException e) {

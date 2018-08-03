@@ -1,4 +1,4 @@
-package threadtest.threadlocal;
+package thread.threadlocal;
 
 /**
  * ThreadLocalTest
