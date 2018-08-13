@@ -19,6 +19,7 @@ public class ThreadDemo1 {
             demo1.run1();
         }, "线程1");
 
+
         thread.start();
         thread1.start();
 

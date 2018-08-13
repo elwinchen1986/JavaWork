@@ -53,6 +53,11 @@ public class ListTest {
         copyOnWriteArrayList.add("12312");
         copyOnWriteArrayList.get(1);
 
+
+        Arrays.sort(l_list.toArray());
+
+        Collections.sort(l_list);
+
     }
 
 

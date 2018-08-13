@@ -15,7 +15,6 @@ import java.nio.channels.FileChannel;
  *
  * @author chenqiang
  * @date 2018/7/17 10:25
- * @description 复制文件的内容到另外一个文件
  */
 public class NIOTest {
 
@@ -24,26 +23,16 @@ public class NIOTest {
 
         try {
 
-
             FileInputStream fileInputStream = new FileInputStream("test.txt");
-
             FileChannel channel = fileInputStream.getChannel();
 
-
             ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
-
-            String d="123456";
-
-            byteBuffer.remaining();
-
-            byteBuffer.rewind();
-
-            byteBuffer.get();
-
-            byteBuffer.flip();
+            String d = "123456";
+            byteBuffer.put(d.getBytes());
 
             int read = channel.read(byteBuffer);
 
+            System.out.println(read);
 
 
         } catch (FileNotFoundException e) {
