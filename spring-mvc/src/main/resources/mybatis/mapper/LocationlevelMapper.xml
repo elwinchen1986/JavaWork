@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xingyuan.springmvcdemo.dao.LocationlevelMapper">
+    <resultMap id="BaseResultMap" type="com.xingyuan.springmvcdemo.domain.entity.Locationlevel">
+        <result column="LocationID" jdbcType="INTEGER" property="locationID"/>
+        <result column="LocationName" jdbcType="VARCHAR" property="locationName"/>
+        <result column="LocationLevelName" jdbcType="VARCHAR" property="locationLevelName"/>
+        <result column="LocationLevel" jdbcType="SMALLINT" property="locationLevel"/>
+        <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="IsActive" jdbcType="SMALLINT" property="isActive"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    LocationID, LocationName, LocationLevelName, LocationLevel, UpdateTime, IsActive
+  </sql>
+    <select id="selectByExample" parameterType="com.xingyuan.springmvcdemo.domain.entity.LocationlevelExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from LocationLevel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limit != null">
+            <if test="offset != null">
+                limit ${offset}, ${limit}
+            </if>
+            <if test="offset == null">
+                limit ${limit}
+            </if>
+        </if>
+    </select>
+    <delete id="deleteByExample" parameterType="com.xingyuan.springmvcdemo.domain.entity.LocationlevelExample">
+        delete from LocationLevel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.xingyuan.springmvcdemo.domain.entity.Locationlevel">
+        <selectKey keyProperty="locationID" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into LocationLevel (LocationName, LocationLevelName,
+        LocationLevel, UpdateTime, IsActive
+        )
+        values (#{locationName,jdbcType=VARCHAR}, #{locationLevelName,jdbcType=VARCHAR},
+        #{locationLevel,jdbcType=SMALLINT}, #{updateTime,jdbcType=TIMESTAMP}, #{isActive,jdbcType=SMALLINT}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.xingyuan.springmvcdemo.domain.entity.Locationlevel">
+        <selectKey keyProperty="locationID" order="AFTER" resultType="java.lang.Integer">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into LocationLevel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="locationName != null">
+                LocationName,
+            </if>
+            <if test="locationLevelName != null">
+                LocationLevelName,
+            </if>
+            <if test="locationLevel != null">
+                LocationLevel,
+            </if>
+            <if test="updateTime != null">
+                UpdateTime,
+            </if>
+            <if test="isActive != null">
+                IsActive,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="locationName != null">
+                #{locationName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationLevelName != null">
+                #{locationLevelName,jdbcType=VARCHAR},
+            </if>
+            <if test="locationLevel != null">
+                #{locationLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isActive != null">
+                #{isActive,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.xingyuan.springmvcdemo.domain.entity.LocationlevelExample"
+            resultType="java.lang.Long">
+        select count(*) from LocationLevel
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update LocationLevel
+        <set>
+            <if test="record.locationID != null">
+                LocationID = #{record.locationID,jdbcType=INTEGER},
+            </if>
+            <if test="record.locationName != null">
+                LocationName = #{record.locationName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.locationLevelName != null">
+                LocationLevelName = #{record.locationLevelName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.locationLevel != null">
+                LocationLevel = #{record.locationLevel,jdbcType=SMALLINT},
+            </if>
+            <if test="record.updateTime != null">
+                UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.isActive != null">
+                IsActive = #{record.isActive,jdbcType=SMALLINT},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update LocationLevel
+        set LocationID = #{record.locationID,jdbcType=INTEGER},
+        LocationName = #{record.locationName,jdbcType=VARCHAR},
+        LocationLevelName = #{record.locationLevelName,jdbcType=VARCHAR},
+        LocationLevel = #{record.locationLevel,jdbcType=SMALLINT},
+        UpdateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+        IsActive = #{record.isActive,jdbcType=SMALLINT}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+</mapper>
